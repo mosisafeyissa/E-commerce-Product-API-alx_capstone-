@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <!-- Hero Section -->
+  <div class="p-5 mb-5 bg-light rounded shadow text-center">
+    <h1 class="display-4 fw-bold">Welcome to Your E-commerce Site!</h1>
+    <p class="lead text-muted mb-4">
+      Discover a wide range of products from various categories.
+    </p>
+    <hr class="my-4">
+    <p class="mb-4">
+      Explore our products or browse by category to find exactly what you're looking for.
+    </p>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <a class="btn btn-primary btn-lg shadow-sm" href="{% url 'products-grid' %}">
+        <i class="bi bi-box-seam me-2"></i> Browse Products
+      </a>
+      <a class="btn btn-outline-secondary btn-lg shadow-sm" href="{% url 'category_list' %}">
+        <i class="bi bi-tags me-2"></i> View Categories
+      </a>
+    </div>
+  </div>
+
+  <!-- Featured Categories Section (optional) -->
+  {% if categories %}
+  <h2 class="fw-bold mb-4 text-center">Explore Categories</h2>
+  <div class="row row-cols-1 row-cols-md-4 g-4 mb-5">
+    {% for category in categories %}
+    <div class="col">
+      <div class="card h-100 shadow-sm border-0 text-center p-3">
+        <h5 class="card-title fw-semibold">{{ category.name }}</h5>
+        <p class="card-text text-muted small">{{ category.description|truncatechars:80 }}</p>
+        <a href="{% url 'category_detail' category.id %}" class="btn btn-outline-primary btn-sm mt-auto">
+          <i class="bi bi-folder2-open"></i> Explore
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
+
